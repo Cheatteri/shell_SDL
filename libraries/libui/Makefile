@@ -6,7 +6,7 @@
 #    By: jhakala <jhakala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/01 19:05:42 by jhakala           #+#    #+#              #
-#    Updated: 2020/08/01 21:35:45 by jhakala          ###   ########.fr        #
+#    Updated: 2020/08/03 18:56:21 by jhakala          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -16,7 +16,8 @@ GCC = gcc -Wall -Wextra -Werror
 DEPS = $(patsubst %,$(H_DIR)/%,$(HEAD))
 
 S_DIR = src
-SRC = draw_line.c
+SRC = draw_line.c \
+	draw_square.c
 
 O_DIR = obj
 OBJ = $(addprefix $(O_DIR)/, $(SRC:.c=.o))

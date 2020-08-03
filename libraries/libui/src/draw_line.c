@@ -6,7 +6,7 @@
 /*   By: jhakala <jhakala@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 19:43:56 by jhakala           #+#    #+#             */
-/*   Updated: 2020/08/03 18:24:16 by jhakala          ###   ########.fr       */
+/*   Updated: 2020/08/03 23:46:52 by jhakala          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,28 @@ void    ui_draw_line_color(t_xyz_point a, t_xyz_point b, int w, int h, int *pixe
     color = a.color;
 	color2 = b.color;
 	distance = sqrt(dx * dx + dy * dy);
-	r1 = (float)(((color >> 24) - (color2 >> 24))) / distance;
-	g1 = (float)((((color >> 16) & 0xFF) - ((color2 >> 16) & 0xFF))) / distance;
-	b1 = (float)((((color >> 8) & 0xFF) - ((color2 >> 8) & 0xFF))) / distance;
+	if (distance == 0)
+		return ;
+	r1 = (float)(((color >> 24) & 0xFF) - ((color2 >> 24) & 0xFF)) / distance;
+	g1 = (float)(((color >> 16) & 0xFF) - ((color2 >> 16) & 0xFF)) / distance;
+	b1 = (float)(((color >> 8) & 0xFF) - ((color2 >> 8) & 0xFF)) / distance;
+
 	r2 = r1;
 	g2 = g1;
 	b2 = b1;
 
+	r1 = 0;
+	g1 = 0;
+	b1 = 0;
+	
 	point.x = a.x;
 	point.y = a.y;
-	color2 = color + ((int)r1 << 24) + ((int)g1 << 16) + ((int)b1 << 8);
+	color2 = color;
     while (point.x != b.x || point.y != b.y)
     {
-		pixels[point.y * w + (point.x)] = color2 + ((int)(r1 += r2) << 24) + ((int)(g1 += g2)<< 16) + ((int)(b1 += b2) << 8);
+		pixels[point.y * w + (point.x)] = color;
+		color = color2 + ((int)(r1 -= r2) << 24) + ((int)(g1 -= g2) << 16) + ((int)(b1 -= b2) << 8);
+//		pixels[point.y * w + (point.x)] = color2 + ((int)(r1 += r2) << 24) + ((int)(g1 += g2) << 16) + ((int)(b1 += b2) << 8);
         if ((e2 = e1 * 2) > -dy)
         {
             e1 -=dy;
@@ -59,4 +68,5 @@ void    ui_draw_line_color(t_xyz_point a, t_xyz_point b, int w, int h, int *pixe
             point.y += y_val;
         }
     }
+	pixels[point.y * w + (point.x)] = color;
 }

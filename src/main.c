@@ -42,7 +42,12 @@ int		main(void)
 		
 	t_xyz_point a;
 	t_xyz_point b;
+	t_xyz_square s;
 
+
+//	printf("%d, %d, %d, %d, %d, %d\n", s.square[0].x, s.square[0].y, s.square[0].color,
+//           s.square[1].x, s.square[1].y, s.square[1].color);
+//	exit(0);
 	while (1)
 	{
 		fps1 = SDL_GetTicks();
@@ -59,19 +64,85 @@ int		main(void)
 		}
 		ft_memset(pixels, 125, ow * oh * sizeof(int));
 		
+//		printf("vertailu = %08x\n", pixels[1]);
+//		break ;
+		
+		s.square[0].x = 100;
+		s.square[0].y = 100;
+		s.square[0].color = 0xFFFFFF01;
+		s.square[1].x = 200;
+		s.square[1].y = 100;
+		s.square[1].color = 0x00FF0000;
+		s.square[2].x = 100;
+		s.square[2].y = 200;
+		s.square[2].color = 0x00000000;
+		s.square[3].x = 200;
+		s.square[3].y = 200;
+		s.square[3].color = 0x00000000;
+		
+		ui_draw_square_color(s, w, h, pixels);
+		
+		s.square[0].x = 300;
+		s.square[0].y = 100;
+		s.square[0].color = 0xFFFFFF00;
+		s.square[1].x = 400;
+		s.square[1].y = 100;
+		s.square[1].color = 0x00FF0000;
+		s.square[2].x = 300;
+		s.square[2].y = 200;
+		s.square[2].color = 0x00000000;
+		s.square[3].x = 350;
+		s.square[3].y = 200;
+		s.square[3].color = 0x00000000;
+		
+		ui_draw_square_color(s, w, h, pixels);
+
+		s.square[0].x = 100;
+		s.square[0].y = 300;
+		s.square[0].color = 0xFFFFFF01;
+		s.square[1].x = 200;
+		s.square[1].y = 300;
+		s.square[1].color = 0x00FF0000;
+		s.square[2].x = 100;
+		s.square[2].y = 400;
+		s.square[2].color = 0x00000000;
+		s.square[3].x = 250;
+		s.square[3].y = 450;
+		s.square[3].color = 0x00000000;
+		
+		ui_draw_square_color(s, w, h, pixels);
+
+		s.square[0].x = 420;
+		s.square[0].y = 302;
+		s.square[0].color = 0xFFFFFF01;
+		s.square[1].x = 600;
+		s.square[1].y = 300;
+		s.square[1].color = 0x00FF0000;
+		s.square[2].x = 400;
+		s.square[2].y = 400;
+		s.square[2].color = 0x00000000;
+		s.square[3].x = 600;
+		s.square[3].y = 450;
+		s.square[3].color = 0x00000000;
+		
+		ui_draw_square_color(s, w, h, pixels);
+//		printf("vertailu = %08x\n", pixels[1]);
+//		break ;
+//		ui_draw_line_color(s.square[0], s.square[1], w, h, pixels);
+//		exit(0);
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
 		SDL_RenderClear(renderer);
 		SDL_SetRenderDrawColor(renderer, 255, 0, 0, 0);
 		a.x = w / 2;
 		a.y = h / 2;
-		a.color = 0xFF00FF00;
+		a.color = 0xFFFFFF00;
 		b.x = w / 2 + w / 4;
 		b.y = h / 2 + h / 4;
-		b.color = 0x00FF0000;
+		b.color = 0x00000000;
 		old_time = SDL_GetTicks();
 //		for (int z = 0; z < 100000; z++)
-		for (int z = 0; z < 10000; z++)
-			ui_draw_line_color(a, b, w, h, pixels);
+//		for (int z = 0; z < 10000; z++)
+//			ui_draw_line_color(a, b, w, h, pixels);
 		new_time = SDL_GetTicks();
 
 		old_time2 = SDL_GetTicks();
@@ -83,7 +154,7 @@ int		main(void)
 		
 		b.x = a.x - 100;
 		b.y = a.y + 78;
-		ui_draw_line_color(a, b, w, h, pixels);
+//		ui_draw_line_color(a, b, w, h, pixels);
 		
 		SDL_UpdateTexture(texture, NULL, pixels, ow * sizeof(int));
 		SDL_RenderCopy(renderer, texture, NULL, NULL);
@@ -102,12 +173,12 @@ int		main(void)
 					printf("w = %d, h = %d\n", w, h);
 				else if (event.key.keysym.sym == SDLK_d)
 				{
-					int ll = abs(w / 2 - (w / 2 + w / 4));
-					int lll = abs(h / 2 - (h / 2 + h / 4));
+					int ll = abs(0);
+					int lll = abs(100);
 					printf("distance = %d\n", (int)sqrt(ll * ll + lll * lll));
 				}
 				else if (event.key.keysym.sym == SDLK_f)
-					printf("FPS = '%3d', %d\n", 1000 /(fps2 - fps1), fps2 - fps1);
+					printf("FPS = '%3d'\n", 1000 /(fps2 - fps1 != 0 ? fps2 - fps1 : 0));
 				else if (event.key.keysym.sym == SDLK_t)
 				{
 					printf("own ui_draw_line tic rate = '%4u',", new_time - old_time);					

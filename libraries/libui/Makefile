@@ -6,18 +6,19 @@
 #    By: jhakala <jhakala@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/01 19:05:42 by jhakala           #+#    #+#              #
-#    Updated: 2020/08/03 18:56:21 by jhakala          ###   ########.fr        #
+#    Updated: 2020/08/04 17:10:55 by jhakala          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 NAME = libui.a
 
-GCC = gcc -Wall -Wextra -Werror
+GCC = gcc #-Wall -Wextra -Werror
 DEPS = $(patsubst %,$(H_DIR)/%,$(HEAD))
 
 S_DIR = src
 SRC = draw_line.c \
-	draw_square.c
+	draw_square.c \
+	draw_triangle.c
 
 O_DIR = obj
 OBJ = $(addprefix $(O_DIR)/, $(SRC:.c=.o))

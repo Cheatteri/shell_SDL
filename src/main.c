@@ -43,11 +43,8 @@ int		main(void)
 	t_xyz_point a;
 	t_xyz_point b;
 	t_xyz_square s;
+	t_xyz_triangle t;
 
-
-//	printf("%d, %d, %d, %d, %d, %d\n", s.square[0].x, s.square[0].y, s.square[0].color,
-//           s.square[1].x, s.square[1].y, s.square[1].color);
-//	exit(0);
 	while (1)
 	{
 		fps1 = SDL_GetTicks();
@@ -63,7 +60,48 @@ int		main(void)
 				return (error(SDL_GetError()));
 		}
 		ft_memset(pixels, 125, ow * oh * sizeof(int));
-		
+
+		t.triangle[0].x = 100;
+		t.triangle[0].y = 100;
+		t.triangle[0].color = 0xFF000000;
+		t.triangle[1].x = 200;
+		t.triangle[1].y = 150;
+		t.triangle[1].color = 0x0000FF00;
+		t.triangle[2].x = 150;
+		t.triangle[2].y = 200;
+		t.triangle[2].color = 0x00FF0000;
+
+		ui_draw_line_color(t.triangle[0], t.triangle[1], w, h, pixels);
+		ui_draw_line_color(t.triangle[1], t.triangle[2], w, h, pixels);
+		ui_draw_line_color(t.triangle[2], t.triangle[0], w, h, pixels);
+		t.triangle[2].x = 250;
+		t.triangle[1].x = 300;
+		t.triangle[0].x = 200;
+		ui_draw_triangle_color(t, w, h, pixels);
+//
+		t.triangle[0].x = 300;
+		t.triangle[0].y = 300;
+		t.triangle[0].color = 0xFF000000;
+		t.triangle[1].x = 600;
+		t.triangle[1].y = 600;
+		t.triangle[1].color = 0x0000FF00;
+		t.triangle[2].x = 200;
+		t.triangle[2].y = 700;
+		t.triangle[2].color = 0x00FF0000;
+		ui_draw_triangle_color(t, w, h, pixels);
+
+		t.triangle[0].x = 300;
+		t.triangle[2].y = 300;
+		t.triangle[0].color = 0xFF000000;
+		t.triangle[1].x = 600;
+		t.triangle[1].y = 600;
+		t.triangle[1].color = 0x0000FF00;
+		t.triangle[2].x = 601;
+		t.triangle[0].y = 299;
+		t.triangle[2].color = 0x00FF0000;
+		ui_draw_triangle_color(t, w, h, pixels);
+//
+
 //		printf("vertailu = %08x\n", pixels[1]);
 //		break ;
 		
@@ -80,7 +118,7 @@ int		main(void)
 		s.square[3].y = 200;
 		s.square[3].color = 0x00000000;
 		
-		ui_draw_square_color(s, w, h, pixels);
+//		ui_draw_square_color(s, w, h, pixels);
 		
 		s.square[0].x = 300;
 		s.square[0].y = 100;
@@ -95,7 +133,7 @@ int		main(void)
 		s.square[3].y = 200;
 		s.square[3].color = 0x00000000;
 		
-		ui_draw_square_color(s, w, h, pixels);
+//		ui_draw_square_color(s, w, h, pixels);
 
 		s.square[0].x = 100;
 		s.square[0].y = 300;
@@ -110,7 +148,7 @@ int		main(void)
 		s.square[3].y = 450;
 		s.square[3].color = 0x00000000;
 		
-		ui_draw_square_color(s, w, h, pixels);
+//		ui_draw_square_color(s, w, h, pixels);
 
 		s.square[0].x = 420;
 		s.square[0].y = 302;
@@ -125,7 +163,7 @@ int		main(void)
 		s.square[3].y = 450;
 		s.square[3].color = 0x00000000;
 		
-		ui_draw_square_color(s, w, h, pixels);
+//		ui_draw_square_color(s, w, h, pixels);
 //		printf("vertailu = %08x\n", pixels[1]);
 //		break ;
 //		ui_draw_line_color(s.square[0], s.square[1], w, h, pixels);
